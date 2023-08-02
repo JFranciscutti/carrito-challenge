@@ -10,15 +10,9 @@ export const ListadoProductosComponent = ({ listadoProductos }: Props) => {
 
   const { agregarProducto, productosSeleccionados, reducirCantGemas } = useCarrito();
 
-  const esSeleccionValida = (prod: Producto) => {
-    return !productosSeleccionados.includes(prod) && !productosSeleccionados.map((p) => p.categoria).includes(prod.categoria);
-  }
-
   const handleSelectProducto = (prod: Producto) => {
-    if (esSeleccionValida(prod)) {
-      reducirCantGemas(prod.precio);
-      agregarProducto(prod);
-    }
+    reducirCantGemas(prod.precio);
+    agregarProducto(prod);
   }
 
   return (

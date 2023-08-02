@@ -7,4 +7,5 @@ export default interface CarritoContextType {
     cantGemas: number;
     reducirCantGemas: (cantAReducir: number) => void;
     incrementarCantGemas: (cantAIncrementar: number) => void;
+    resetearCarrito: () => void;
 }

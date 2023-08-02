@@ -8,7 +8,8 @@ const CarritoContext = createContext<CarritoContextType>({
     eliminarProducto: () => { },
     cantGemas: 0,
     reducirCantGemas: () => { },
-    incrementarCantGemas: () => { }
+    incrementarCantGemas: () => { },
+    resetearCarrito: () => { }
 });
 
 export function CarritoProvider({ children }: { children: React.ReactNode }) {
@@ -35,10 +36,15 @@ export function CarritoProvider({ children }: { children: React.ReactNode }) {
         setCantGemas(cantGemas + cantAIncrementar);
     }
 
+    const resetearCarrito = () => {
+        setProductosSeleccionados([]);
+        setCantGemas(3);
+    }
+
 
     return (
         <CarritoContext.Provider
-            value={{ productosSeleccionados, agregarProducto, eliminarProducto, cantGemas, reducirCantGemas, incrementarCantGemas }}
+            value={{ productosSeleccionados, agregarProducto, eliminarProducto, cantGemas, reducirCantGemas, incrementarCantGemas, resetearCarrito }}
         >
             {children}
         </CarritoContext.Provider>

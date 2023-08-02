@@ -30,8 +30,8 @@ export const ProductoContainer = ({ producto, handleSelectProducto }: Props) => 
         )
     }
 
-    const esPrecioValido = () => {
-        return cantGemas >= producto.precio;
+    const esSeleccionable = () => {
+        return (!productosSeleccionados.includes(producto) || !productosSeleccionados.map((p) => p.categoria).includes(producto.categoria)) && cantGemas >= producto.precio;
     }
 
     return (
@@ -54,7 +54,7 @@ export const ProductoContainer = ({ producto, handleSelectProducto }: Props) => 
                     <button
                         style={{
                             display: "flex",
-                            backgroundColor: esPrecioValido() ? Colors.PURPLE : "gray",
+                            backgroundColor: esSeleccionable() ? Colors.PURPLE : "gray",
                             borderRadius: 15,
                             justifyContent: "center",
                             alignItems: "center",
@@ -62,8 +62,8 @@ export const ProductoContainer = ({ producto, handleSelectProducto }: Props) => 
                             padding: "0.4em",
                             margin: "1em 0"
                         }}
-                        onClick={() => handleSelectProducto(producto)}
-                        disabled={!esPrecioValido()}
+                        onClick={() => esSeleccionable() && handleSelectProducto(producto)}
+                        disabled={!esSeleccionable()}
                     >
                         Agregar
                     </button>
