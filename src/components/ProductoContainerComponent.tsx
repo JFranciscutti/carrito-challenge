@@ -42,7 +42,7 @@ export const ProductoContainerComponent = ({ producto, handleSelectProducto }: P
                     <span style={{ color: Colors.GRAY_TEXT }}>{`Categoria: ${producto.categoria}`}</span>
                 </CategoriaContainer>
                 <AgregarButton
-                    style={{ backgroundColor: esSeleccionable() ? Colors.PURPLE : "gray", }}
+                    style={{ backgroundColor: esSeleccionable() ? Colors.PURPLE : Colors.GRAY }}
                     onClick={() => esSeleccionable() && handleSelectProducto(producto)}
                     disabled={!esSeleccionable()}
                 >

@@ -33,7 +33,7 @@ function App() {
     <MainContainer>
       <HeaderComponent cantProductos={productosSeleccionados.length} handleShowCarrito={handleShowCarrito} />
       <BodyContainer>
-        <div style={{ display: "grid", placeSelf: "center", margin: "3em 0" }} >
+        <div style={{ margin: "3em 0" }}>
           {showCarrito
             ? <CarritoComponent handleShowCarrito={handleShowCarrito} />
             : <ListadoProductosComponent listadoProductos={productos} />}
@@ -58,7 +58,7 @@ const MainContainer = styled('div')({
 });
 
 const BodyContainer = styled('div')({
-  display: "flex",
-  justifyContent: "center",
-  minHeight: "100%"
+  display: "grid",
+  placeItems: "center",
+  minHeight: "100%",
 })
