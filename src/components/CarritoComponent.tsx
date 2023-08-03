@@ -3,7 +3,8 @@ import { useCarrito } from "../context/CarritoContext";
 import Producto from "../interfaces/Producto";
 import { ProductoCheckoutContainer } from "./ProductoCheckoutContainer";
 import { Colors } from "../utils/Colors";
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import styled from "styled-components";
 
 interface Props {
   handleShowCarrito: () => void;
@@ -14,6 +15,11 @@ export const CarritoComponent = ({ handleShowCarrito }: Props) => {
   const { productosSeleccionados, eliminarProducto, incrementarCantGemas, resetearCarrito } = useCarrito();
 
   const [showLista, setShowLista] = useState<boolean>(true);
+
+  const handleVolver = () => {
+    setShowLista(true);
+    handleShowCarrito();
+  }
 
   const handleFinalizarCompra = async () => {
     console.log(productosSeleccionados);
@@ -35,46 +41,64 @@ export const CarritoComponent = ({ handleShowCarrito }: Props) => {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", width: "38em" }}>
-      <div style={{ marginBottom: "2em" }}>
-        <button
-          style={{ backgroundColor: Colors.PURPLE, color: "white", padding: "0.3em .5em", borderRadius: 10, }}
-          onClick={() => { setShowLista(true); handleShowCarrito() }}
-        >
-          Volver
-        </button>
-      </div>
-      {showLista && <div>
-        {
-          productosSeleccionados.map((producto: Producto) => (
-            <>
-              <ProductoCheckoutContainer producto={producto} handleEliminarProducto={handleEliminarProducto} />
-              <div style={{ backgroundColor: "gray", height: "2px" }}></div>
-            </>))
-        }
-      </div>}
+    <MainContainer>
+      <VolverButton onClick={handleVolver}
+      >
+        Volver
+      </VolverButton>
+      {showLista &&
+        <div>
+          {
+            productosSeleccionados.map((producto: Producto) => (
+              <Fragment key={producto.id}>
+                <ProductoCheckoutContainer producto={producto} handleEliminarProducto={handleEliminarProducto} />
+                <Divider />
+              </Fragment>))
+          }
+        </div>}
 
-      {
-        !showLista && <div>
-          <p>Compra realizada!</p>
-        </div>
-      }
-      <div style={{ display: "flex", marginTop: "2em" }}>
-        {productosSeleccionados.length > 0 || !showLista
-          ? (
-            <button
-              style={{
-                backgroundColor: showLista ? Colors.PURPLE : "gray",
-                color: "white", padding: "0.3em .5em", borderRadius: 10, width: "100%"
-              }}
-              onClick={handleFinalizarCompra}
-              disabled={!showLista}
-            >
-              Comprar
-            </button>)
-          : (<p>No hay productos seleccionados</p>)
-        }
+      {!showLista && <p>Compra realizada!</p>}
+      <div style={{ marginTop: "2em" }}>
+        {productosSeleccionados.length > 0 || !showLista ? (
+          <ComprarButton
+            style={{ backgroundColor: showLista ? Colors.PURPLE : Colors.GRAY }}
+            onClick={handleFinalizarCompra}
+            disabled={!showLista}
+          >
+            Comprar
+          </ComprarButton>)
+          : (
+            <p>No hay productos seleccionados</p>
+          )}
       </div>
-    </div>
+    </MainContainer>
   );
 };
+
+const MainContainer = styled('div')({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  width: "38em"
+});
+
+const VolverButton = styled('button')({
+  backgroundColor: Colors.PURPLE,
+  color: Colors.WHITE,
+  padding: "0.3em .5em",
+  borderRadius: 10,
+  marginBottom: "2em",
+  width: "12%"
+})
+
+const Divider = styled('div')({
+  backgroundColor: Colors.GRAY,
+  height: "2px"
+});
+
+const ComprarButton = styled('button')({
+  color: Colors.WHITE,
+  padding: "0.3em .5em",
+  borderRadius: 10,
+  width: "100%"
+});

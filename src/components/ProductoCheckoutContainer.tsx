@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import Producto from "../interfaces/Producto";
 import { Colors } from "../utils/Colors";
 
@@ -8,18 +9,29 @@ interface Props {
 export const ProductoCheckoutContainer = ({ producto, handleEliminarProducto }: Props) => {
 
     return (
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", padding: "0.4em 2em", backgroundColor: Colors.BACKGROUND_GRAY, color: "white" }}>
-            <div style={{ backgroundColor: "gray", borderRadius: 20 }}>
+        <MainContainer>
+            <ImageContainer>
                 <img src={producto.imagen} />
-            </div>
-            <div>
-                {producto.nombre}
-            </div>
-            <button
-                onClick={() => handleEliminarProducto(producto)}
-            >
+            </ImageContainer>
+            <p>{producto.nombre}</p>
+            <button onClick={() => handleEliminarProducto(producto)}            >
                 X
             </button>
-        </div>
+        </MainContainer>
     )
 }
+
+const MainContainer = styled('div')({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: "0.4em 2em",
+    backgroundColor: Colors.BACKGROUND_GRAY,
+    color: Colors.WHITE
+});
+
+const ImageContainer = styled('div')({
+    backgroundColor: "gray",
+    borderRadius: 20
+})

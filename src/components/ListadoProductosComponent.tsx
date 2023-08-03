@@ -1,6 +1,7 @@
+import styled from "styled-components";
 import { useCarrito } from "../context/CarritoContext";
 import Producto from "../interfaces/Producto";
-import { ProductoContainer } from "./ProductoContainer";
+import { ProductoContainerComponent } from "./ProductoContainerComponent";
 
 interface Props {
   listadoProductos: Producto[];
@@ -16,10 +17,17 @@ export const ListadoProductosComponent = ({ listadoProductos }: Props) => {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 0fr)", justifyItems: "center", gap: "1em" }}>
+    <MainContainer>
       {
-        listadoProductos.map((producto) => <ProductoContainer producto={producto} handleSelectProducto={handleSelectProducto} />)
+        listadoProductos.map((producto) => <ProductoContainerComponent producto={producto} handleSelectProducto={handleSelectProducto} />)
       }
-    </div>
+    </MainContainer>
   );
 };
+
+const MainContainer = styled('div')({
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 0fr)",
+  justifyItems: "center",
+  gap: "1em"
+})

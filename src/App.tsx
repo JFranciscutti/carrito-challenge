@@ -5,6 +5,7 @@ import { HeaderComponent } from "./components/HeaderComponent";
 import { ListadoProductosComponent } from "./components/ListadoProductosComponent";
 import Producto from "./interfaces/Producto";
 import { CarritoProvider, useCarrito } from "./context/CarritoContext";
+import styled from "styled-components";
 
 function App() {
   const [showCarrito, setShowCarrito] = useState(false);
@@ -29,19 +30,16 @@ function App() {
   }
 
   return (
-    <div
-      className="min-h-full bg-fixed"
-      style={{ backgroundImage: "url(background.webp)" }}
-    >
+    <MainContainer>
       <HeaderComponent cantProductos={productosSeleccionados.length} handleShowCarrito={handleShowCarrito} />
-      <div className="flex justify-center min-h-full">
+      <BodyContainer>
         <div style={{ display: "grid", placeSelf: "center", margin: "3em 0" }} >
           {showCarrito
             ? <CarritoComponent handleShowCarrito={handleShowCarrito} />
             : <ListadoProductosComponent listadoProductos={productos} />}
         </div>
-      </div>
-    </div>
+      </BodyContainer>
+    </MainContainer>
   );
 }
 
@@ -52,3 +50,15 @@ export default function WrappedApp() {
     </CarritoProvider>
   )
 };
+
+const MainContainer = styled('div')({
+  minHeight: "100%",
+  backgroundAttachment: "fixed",
+  backgroundImage: "url(background.webp)"
+});
+
+const BodyContainer = styled('div')({
+  display: "flex",
+  justifyContent: "center",
+  minHeight: "100%"
+})
