@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useCarrito } from "../context/CarritoContext";
 
 interface Props {

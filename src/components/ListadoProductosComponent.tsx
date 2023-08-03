@@ -8,7 +8,7 @@ interface Props {
 
 export const ListadoProductosComponent = ({ listadoProductos }: Props) => {
 
-  const { agregarProducto, productosSeleccionados, reducirCantGemas } = useCarrito();
+  const { agregarProducto, reducirCantGemas } = useCarrito();
 
   const handleSelectProducto = (prod: Producto) => {
     reducirCantGemas(prod.precio);

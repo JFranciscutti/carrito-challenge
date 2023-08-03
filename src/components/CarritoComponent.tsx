@@ -16,9 +16,10 @@ export const CarritoComponent = ({ handleShowCarrito }: Props) => {
   const [showLista, setShowLista] = useState<boolean>(true);
 
   const handleFinalizarCompra = async () => {
+    console.log(productosSeleccionados);
     try {
       const productIds = productosSeleccionados.map((producto) => producto.id);
-      const response = await axios.post('http://localhost:3001/compras', productIds);
+      const response = await axios.post('http://localhost:3001/compras', { itemsId: productIds });
       setShowLista(false);
       resetearCarrito();
 
