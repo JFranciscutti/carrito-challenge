@@ -7,7 +7,7 @@ const CarritoContext = createContext<CarritoContextType>({
     agregarProducto: () => { },
     eliminarProducto: () => { },
     cantGemas: 0,
-    reducirCantGemas: () => { },
+    reducirCantGemas: () => {},
     incrementarCantGemas: () => { },
     resetearCarrito: () => { }
 });
